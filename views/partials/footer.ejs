@@ -1,3 +1,5 @@
+        </div>  <!-- /.container -->
+        
         <p class="text-center">&copy; 2017 YelpCamp | Created by Darrell Pawson</p>
         
          <!-- jQuery -->
@@ -5,6 +7,28 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	    <script src="https://use.fontawesome.com/aca25d40ae.js"></script>
+	    <script type="text/javascript" src="https://maps.google.com/map..."></script>
         <!--<script type="text/javascript" src="/"></script>-->
+        
+        <script>
+            $("#checkingAddress").click(checkGeocode);
+
+            function checkGeocode(){
+                var addr = document.getElementById("location");
+                // Get geocoder instance
+                var geocoder = new google.maps.Geocoder();
+
+                // Geocode the address
+                geocoder.geocode({'address': addr.value}, function(results, status){
+                if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                    alert('looks good')
+                    // set it to the correct, formatted address if it's valid
+                    addr.value = results[0].formatted_address;;
+
+                    // show an error if it's not
+                }else alert("Invalid address");
+            });
+        };
+        </script>
     </body>
 </html>

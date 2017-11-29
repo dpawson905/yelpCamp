@@ -20,6 +20,8 @@ var commentRoutes    = require("./routes/comments"),
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose.connect(url, {useMongoClient: true});
 
+mongoose.Promise = global.Promise;
+
 app.use(bodyParser.urlencoded({extended: true}));
 // use this to remove .ejs from res.render()
 app.set("view engine", "ejs");
