@@ -6,6 +6,7 @@ var Campground = require("../models/campground");
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+var middleware = require("../middleware");
 
 
 // root Route
@@ -201,6 +202,38 @@ router.get("/users/:id", function(req, res) {
            });
        }
    });
+});
+
+// Edit Route
+router.get("/users/:id/edit", function(req, res) {
+   User.findById(req.params.id, function(err, foundUser) {
+     if(err || !foundUser) {
+       req.flash("error", "That user doesnt exist");
+       res.redirect("back");
+     } else {
+       res.render("users/edit", {user: foundUser});
+     }
+   }); 
+});
+
+// update ROUTE
+router.put("/users/:id", function(req, res) {
+  var newData = {
+    firstName: req.body.user.firstName,
+    lastName: req.body.user.lastName,
+    email: req.body.user.email,
+    avatar: req.body.user.avatar,
+    bio: req.body.user.bio
+    };
+    User.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, user){
+      if(err || !user) {
+        req.flash("error", "Invalid User");
+        res.redirect("back");
+      } else {
+        req.flash("success", "Profile updated");
+        res.redirect("/users/" + user._id);
+      }
+    });
 });
 
 module.exports = router;

@@ -1,24 +1,41 @@
 <% include ../partials/header %>
 
-<div class="row">
+  <div class="row">
     <div class="col-md-4">
-        <h1><%=user.firstName + " " + user.lastName %></h1>
-        <div class="thumbnail">
-            <img src="<%=user.avatar%>" alt="user profile image">
-            <div class="caption">
-                <a href="mailto:<%=user.email%>">Contact Me</a>
-            </div>
+      <h1><%=user.firstName + " " + user.lastName %></h1>
+      <div class="thumbnail">
+        <img src="<%=user.avatar%>" alt="user profile image">
+        <div class="caption">
+          <a href="mailto:<%=user.email%>">Contact Me</a>
         </div>
-        <p><%= user.bio %></p>
+      </div>
+      <h5>Bio:</h5>
+      <p>
+        <%= user.bio %>
+      </p>
     </div>
-    <div class="col-md-8">
-        <h3>Submitted Campgrounds</h3>
-        <% campgrounds.forEach(function(campground){ %>
-            <ul>
-                <li><a href="/campgrounds<%= campground.id %>"><%= campground.name %></a></li>
-            </ul>
-        <% }) %>
+    <div class="col-md-6">
+      <h4>Campgrounds posted by <%= user.username %></h4>
+      <% if(campgrounds.length < 1) { %>
+        <h6 class="mt-4 ml-2"><em>No campgrounds submitted yet...</em></h6>
+        <% } else { %>
+          <% campgrounds.forEach( campground => { %>
+            <p class="user-campground-list">
+              <a href="../campgrounds/<%= campground.id %>">
+                <%= campground.name %>
+              </a>
+            </p>
+            <% }) %>
+              <% } %>
     </div>
-</div>
+    <div class="col-md-2">
+        <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+        <div class="text-center">
+          <a class=" btn btn-warning" href="/users/<%= user._id %>/edit">
+            Edit Profile </a>
+        </div>
+        <% } %>
+    </div>
+  </div>
 
-<% include ../partials/footer %>
+  <% include ../partials/footer %>

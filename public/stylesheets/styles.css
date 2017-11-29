@@ -20,3 +20,8 @@
     height: 400px;
     width: 100%;
 }
+
+.form-size {
+    width: 33%;
+    margin: 30px auto;
+}

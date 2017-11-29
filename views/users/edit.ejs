@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<div class="row">
+    <h1 style="text-align: center">Edit</h1>
+    <div class="form-size">
+        <form action="/users/<%=user._id%>?_method=PUT" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" name="user[firstName]" value="<%=user.firstName%>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="user[lastName]" value="<%=user.lastName%>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="email" name="user[email]" value="<%=user.email%>">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="user[avatar]" value="<%=user.avatar%>">
+            </div>
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <input class="form-control" type="bio" name="user[bio]" rows="5" value="<%=user.bio%>"></input>
+            </div>
+           
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Update!</button>
+            </div>
+            
+        </form>
+        <a href="/users" + user._id>Go Back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>
