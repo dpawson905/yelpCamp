@@ -31,6 +31,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     Campground.create(newCampground, function(err, newlyCreated) {
         if(err){
             req.flash("error", err.message);
+            res.redirect("back");
         } else {
             // redirect back to campgrounds page
             req.flash("success", "Successfully added a new campground");
@@ -48,8 +49,9 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 router.get("/:id", function(req, res) {
     // find the campground with provided id
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
-        if(err){
-            console.log(err);
+        if(err || !foundCampground){
+            req.flash("error", "Campground not found");
+            res.redirect("/campgrounds");
         } else {
             // render show template to that campground
             res.render("campgrounds/show", {campground: foundCampground});

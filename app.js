@@ -17,7 +17,8 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     authRoutes       = require("./routes/index");
 
-mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url, {useMongoClient: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 // use this to remove .ejs from res.render()
