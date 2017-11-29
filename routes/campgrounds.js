@@ -110,8 +110,5 @@ router.delete("/:id", middleware.checkCampgroundOwnership,  function(req, res){
     });
 });
 
-function toUpper(string){
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 module.exports = router;
