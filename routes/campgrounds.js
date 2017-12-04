@@ -16,7 +16,7 @@ router.get("/", function(req, res){
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         Campground.find({name: regex}, function(err, allCampgrounds){
             if(err){
-                console.log(err);
+                res.redirect("back");
             } else {
                 if(allCampgrounds.length < 1) {
                     noMatch = "No campgrounds match that query, please try again.";
@@ -58,7 +58,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to campgrounds page
-            console.log(newlyCreated);
+            req.flash("success", "Contrats, " + name + " has been created and added to our listings.");
             res.redirect("/campgrounds");
         }
     });

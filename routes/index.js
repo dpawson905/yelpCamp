@@ -41,7 +41,7 @@ router.post("/register", function(req, res) {
             return res.render("register", {error: err.message});
         }
         passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome to YelpCamp " + user.username);
+            req.flash("success", "Welcome to Let's Camp " + user.username);
             res.redirect("/campgrounds"); 
             
         }); 
@@ -56,7 +56,7 @@ router.get("/login", function(req, res) {
 // handle login logic
 router.post("/login", passport.authenticate("local", 
     {
-        successRedirect: "/campgrounds",
+        successReturnToOrRedirect: "/campgrounds",
         failureRedirect: "/login"
     }), function(req, res) {
 });
@@ -107,7 +107,7 @@ router.post('/forgot', function(req, res, next) {
       var mailOptions = {
         to: user.email,
         from: 'darrells.webdesign@gmail.com',
-        subject: 'YelpCamp Password Reset',
+        subject: "Let's Password Reset",
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
@@ -127,7 +127,7 @@ router.post('/forgot', function(req, res, next) {
 
 router.get('/reset/:token', function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-    if (!user) {
+    if (!user || err) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('/forgot');
     }
@@ -139,7 +139,7 @@ router.post('/reset/:token', function(req, res) {
   async.waterfall([
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-        if (!user) {
+        if (!user || err) {
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('back');
         }
@@ -236,22 +236,6 @@ router.put("/users/:id", function(req, res) {
         res.redirect("/users/" + user._id);
       }
     });
-});
-// Twitter Redirect
-router.get("/twitter/", function(req, res) {
-   res.redirect(301, "https://twitter.com/dpawson905"); 
-});
-// Facebook Redirect
-router.get("/facebook/", function(req, res) {
-   res.redirect(301, "https://facebook.com/darrell.pawson"); 
-});
-// Linkedin Redirect
-router.get("/linkedin/", function(req, res) {
-   res.redirect(301, "https://www.linkedin.com/in/darrell-pawson-297700125"); 
-});
-// Gihub Redirect
-router.get("/github/", function(req, res) {
-   res.redirect(301, "https://github.com/dpawson905"); 
 });
 
 module.exports = router;

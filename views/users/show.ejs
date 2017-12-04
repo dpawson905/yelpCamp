@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 
-  <div class="row">
+  <div class="row bg-dark">
     <div class="col-md-4">
-      <h1><%=user.firstName + " " + user.lastName %></h1>
+      <h1 class="profile-username"><%=user.firstName + " " + user.lastName %></h1>
       <div class="thumbnail">
         <img src="<%=user.avatar%>" alt="user profile image">
         <div class="caption">
@@ -10,6 +10,7 @@
         </div>
       </div>
       <h5>Bio:</h5>
+      <hr class="style-two">
       <p>
         <%= user.bio %>
       </p>
@@ -31,7 +32,7 @@
     <div class="col-md-2">
         <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
         <div class="text-center">
-          <a class=" btn btn-warning" href="/users/<%= user._id %>/edit">
+          <a class="profile-username btn btn-warning" href="/users/<%= user._id %>/edit">
             Edit Profile </a>
         </div>
         <% } %>

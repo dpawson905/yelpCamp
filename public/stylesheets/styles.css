@@ -1,6 +1,71 @@
+body {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #f8f8ff;
+}
+
+.bg-dark {
+  background-color: rgba(175, 175, 175, 0.5);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+}
+
+/* navbar */
+.navbar-default {
+    background-color: steelblue;
+    border-color: #E7E7E7;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #f8f8ff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #f1f1ff;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #f8f8ff;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #f1f1ff;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: steelblue;
+    background-color: #f8f8ff;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #f8f8ff;
+    background-color: steelblue;
+}
+.navbar-default .navbar-toggle {
+  border-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff !important;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #000;
+}
+/* End Navbar CSS */
+
 .thumbnail img {
     width: 100%;
     border-radius: 3px;
+}
+
+.img-resize {
+    height: 200px !important;
+    
 }
 
 .thumbnail {
@@ -15,28 +80,50 @@
     display: inline;
 }
 
+/* Profile CSS */
+.profile-username{
+    margin-top: 5px;
+}
+
+/* Gradient transparent - color - transparent */
+
+.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+/* End Profile CSS */
+
 /* Footer */
 .footer {
-    background-color: #f8f8f8;
+    background-color: steelblue;
     height: 60px;
+    color: #fff;
 }
 
 .footer p {
     line-height: 60px;
+    letter-spacing: 1px;
+    font-size: 1em;
 }
 
 .footer ul {
     line-height: 60px;
     display: block;
+    
 }
 
 .footer li {
     display: inline-block;
+    letter-spacing: 1px;
+    font-size: 1.2em;
 }
 
 .footer a {
     text-decoration: none;
+    color: #fff;
 }
+/* End Footer CSS */
 
 /* Google Maps */
 #map {
@@ -47,4 +134,34 @@
 .form-size {
     width: 33%;
     margin: 30px auto;
+}
+
+
+/* Media */
+@media (max-width: 620px) {
+  .footer p {
+    font-size: 0.4em;
+  }
+}
+@media (max-width: 620px) {
+  .footer li {
+    font-size: 0.8em;
+  }
+}
+@media (max-width: 620px) {
+  .bg-dark {
+      background-color: rgba(175, 175, 175, 0.5);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+                  3px 5px 3px rgba(0, 0, 0, 0.1),
+                  6px 8px 6px rgba(0, 0, 0, 0.3);
+      padding: 60px;
+      margin: 10px;
+    }
+}
+@media (max-width: 620px) {
+    #map {
+        height: 400px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
