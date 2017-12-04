@@ -7,6 +7,8 @@ var geocoder = require('geocoder');
 
 
 
+
+
 // this sets access to /campgrounds
 router.get("/", function(req, res){
     var noMatch = null;
