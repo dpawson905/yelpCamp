@@ -15,6 +15,29 @@
     display: inline;
 }
 
+/* Footer */
+.footer {
+    background-color: #f8f8f8;
+    height: 60px;
+}
+
+.footer p {
+    line-height: 60px;
+}
+
+.footer ul {
+    line-height: 60px;
+    display: block;
+}
+
+.footer li {
+    display: inline-block;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
 /* Google Maps */
 #map {
     height: 400px;

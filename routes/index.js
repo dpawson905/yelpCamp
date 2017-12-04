@@ -31,7 +31,8 @@ router.post("/register", function(req, res) {
             bio: req.body.bio
         });
         
-    if(req.body.adminCode === "hodor") {
+    if(req.body.adminCode === process.env.ADMINCODE) {
+        
         newUser.isAdmin = true;
     }
     
@@ -42,6 +43,7 @@ router.post("/register", function(req, res) {
         passport.authenticate("local")(req, res, function(){
             req.flash("success", "Welcome to YelpCamp " + user.username);
             res.redirect("/campgrounds"); 
+            
         }); 
     });
 });
@@ -234,6 +236,22 @@ router.put("/users/:id", function(req, res) {
         res.redirect("/users/" + user._id);
       }
     });
+});
+// Twitter Redirect
+router.get("/twitter/", function(req, res) {
+   res.redirect(301, "https://twitter.com/dpawson905"); 
+});
+// Facebook Redirect
+router.get("/facebook/", function(req, res) {
+   res.redirect(301, "https://facebook.com/darrell.pawson"); 
+});
+// Linkedin Redirect
+router.get("/linkedin/", function(req, res) {
+   res.redirect(301, "https://www.linkedin.com/in/darrell-pawson-297700125"); 
+});
+// Gihub Redirect
+router.get("/github/", function(req, res) {
+   res.redirect(301, "https://github.com/dpawson905"); 
 });
 
 module.exports = router;
