@@ -253,7 +253,7 @@ router.post("/contact/send", function(req, res) {
     });
      
     var mailOptions = {
-        from: Darrell Pawson <darrells.webdesign@gmail.com',
+        from: 'Darrell Pawson <darrells.webdesign@gmail.com',
         to: 'darrells.webdesign@gmail.com',
         cc: req.body.email,
         subject: 'Website Submission',
