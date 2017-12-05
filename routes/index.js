@@ -7,6 +7,7 @@ var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var middleware = require("../middleware");
+var request = require("request");
 
 
 // root Route
@@ -22,6 +23,22 @@ router.get("/register", function(req, res) {
 
 // handle signup logic
 router.post("/register", function(req, res) {
+  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+    return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
+  }
+  // Put your secret key here.
+  var secretKey = "6LduxzsUAAAAAHeYosDbCJpcQitJY_9FhVlSbYdZ";
+  // req.connection.remoteAddress will provide IP address of connected user.
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+  // Hitting GET request to the URL, Google will respond with success or error scenario.
+  request(verificationUrl,function(error,response,body) {
+    body = JSON.parse(body);
+    // Success will be true or false depending upon captcha validation.
+    if(body.success !== undefined && !body.success) {
+      req.flash("error", "Failed Captcha Verification");
+      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
+      
+    }
     var newUser = new User({
             username: req.body.username,
             firstName: req.body.firstName,
@@ -46,8 +63,10 @@ router.post("/register", function(req, res) {
             
         }); 
     });
+  });
 });
-
+    
+    
 // Login Form Route
 router.get("/login", function(req, res) {
    res.render("login", {page: "login"}); 
