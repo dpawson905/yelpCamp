@@ -263,12 +263,10 @@ router.post("/contact/send", function(req, res) {
     
     smtpTransport.sendMail(mailOptions, function(err, info){
       if(err) {
-        req.flash("error", "Something went wrong");
-        console.log(err);
+        req.flash("error", "Something went wrong... Please try again later!");
         res.redirect("/contact");
       } else {
         req.flash("success", "Your email has been sent, we will respond within 24 hours.");
-        console.log("Message sent " + info.response);
         res.redirect("/campgrounds");
         
       }
