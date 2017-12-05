@@ -60,7 +60,6 @@ body {
 
 .thumbnail img {
     width: 100%;
-    height: auto;
     border-radius: 3px;
 }
 .flex {
@@ -68,10 +67,10 @@ body {
   flex-wrap: wrap;
 }
 
-/*.img-resize {*/
-/*    height: 200px !important;*/
+.img-resize {
+    height: 175px !important;
     
-/*}*/
+}
 
 .thumbnail {
     padding: 0;
@@ -168,5 +167,10 @@ body {
         height: 400px;
         width: 100%;
         margin-bottom: 20px;
+    }
+}
+@media (max-width: 991px) {
+    .img-resize {
+        height: auto !important;
     }
 }

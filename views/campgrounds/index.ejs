@@ -23,10 +23,12 @@
                 </p>
             <% } %>
         </div>
+    </div>
+    <div class="row flex text-center">
     <% campgrounds.forEach(function(campground){ %>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="thumbnail">
-                <img class="img-responsive" src="<%= campground.image %>">
+                <img class="img-resize img-responsive" src="<%= campground.image %>">
                 <div class="caption">
                     <h4><%= campground.name %></h4>
                 </div>
