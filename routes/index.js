@@ -22,6 +22,7 @@ router.get("/register", function(req, res) {
 
 // handle signup logic
 router.post("/register", function(req, res) {
+  var answer = req.body.answer;
     var newUser = new User({
             username: req.body.username,
             firstName: req.body.firstName,
@@ -35,6 +36,10 @@ router.post("/register", function(req, res) {
         
         newUser.isAdmin = true;
     }
+    if(req.body.answer !== process.env.SECRET){
+      req.flash("error", "answer the question");
+      res.redirect("back");
+    } else {
     
     User.register(newUser, req.body.password, function(err, user){
         if(err){
@@ -43,10 +48,12 @@ router.post("/register", function(req, res) {
         passport.authenticate("local")(req, res, function(){
             req.flash("success", "Welcome to Let's Camp " + user.username);
             res.redirect("/campgrounds"); 
-            
+          
         }); 
     });
+    }
 });
+
 
 // Login Form Route
 router.get("/login", function(req, res) {
