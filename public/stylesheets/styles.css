@@ -60,13 +60,18 @@ body {
 
 .thumbnail img {
     width: 100%;
+    height: auto;
     border-radius: 3px;
 }
-
-.img-resize {
-    height: 200px !important;
-    
+.flex {
+  display: flex;
+  flex-wrap: wrap;
 }
+
+/*.img-resize {*/
+/*    height: 200px !important;*/
+    
+/*}*/
 
 .thumbnail {
     padding: 0;
