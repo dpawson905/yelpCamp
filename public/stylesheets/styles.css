@@ -140,7 +140,7 @@ body {
 /* Media */
 @media (max-width: 620px) {
   .footer p {
-    font-size: 0.4em;
+    font-size: 0.39em;
   }
 }
 @media (max-width: 620px) {
