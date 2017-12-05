@@ -138,17 +138,17 @@ body {
 
 
 /* Media */
-@media (max-width: 620px) {
+@media (max-width: 800px) {
   .footer p {
     font-size: 0.39em;
   }
 }
-@media (max-width: 620px) {
+@media (max-width: 800px) {
   .footer li {
     font-size: 0.8em;
   }
 }
-@media (max-width: 620px) {
+@media (max-width: 800px) {
   .bg-dark {
       background-color: rgba(175, 175, 175, 0.5);
       box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
@@ -158,7 +158,7 @@ body {
       margin: 10px;
     }
 }
-@media (max-width: 620px) {
+@media (max-width: 800px) {
     #map {
         height: 400px;
         width: 100%;
