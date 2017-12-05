@@ -257,7 +257,7 @@ router.post("/contact/send", function(req, res) {
         to: 'darrells.webdesign@gmail.com',
         subject: 'Website Submission',
         text: 'You have a submission with the following details... Name: '+ req.body.name + ' Phone: ' + req.body.phone + ' Email: ' + req.body.email + ' Message: ' + req.body.message,
-        html: '<p>You have a submission with the following details...</p><ul><li>Name: ' + req.body.name + ' </li><li>Phone: ' + req.body.phone + ' </li><li>Email: ' + req.body.email + ' </li></ul><p>Message: <br/>' + req.body.message + ' </p>'
+        html: '<p>You have a submission with the following details...</p><ul><li>Name: ' + req.body.name + ' </li><li>Phone: ' + req.body.phone + ' </li><li>Email: ' + req.body.email + ' </li></ul><p>Message: <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + req.body.message + ' </p>'
     };
     
     smtpTransport.sendMail(mailOptions, function(err, info){
