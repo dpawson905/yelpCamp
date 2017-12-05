@@ -256,9 +256,9 @@ router.post("/contact/send", function(req, res) {
         from: 'Darrell Pawson <darrells.webdesign@gmail.com',
         to: 'darrells.webdesign@gmail.com',
         replyTo: req.body.email,
-        subject: 'Website Submission',
-        text: 'You have a submission with the following details... Name: '+ req.body.name + ' Phone: ' + req.body.phone + ' Email: ' + req.body.email + ' Message: ' + req.body.message,
-        html: '<h3>You have a submission with the following details...</h3><ul><li>Name: ' + req.body.name + ' </li><li>Phone: ' + req.body.phone + ' </li><li>Email: ' + req.body.email + ' </li></ul><p>Message: <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + req.body.message + ' </p>'
+        subject: "Let's Camp contact request from: " + req.body.name,
+        text: 'You have received an email from... Name: '+ req.body.name + ' Phone: ' + req.body.phone + ' Email: ' + req.body.email + ' Message: ' + req.body.message,
+        html: '<h3>You have received an email from...</h3><ul><li>Name: ' + req.body.name + ' </li><li>Phone: ' + req.body.phone + ' </li><li>Email: ' + req.body.email + ' </li></ul><p>Message: <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + req.body.message + ' </p>'
     };
     
     smtpTransport.sendMail(mailOptions, function(err, info){
