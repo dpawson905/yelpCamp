@@ -254,7 +254,7 @@ router.post("/contact/send", function(req, res) {
      
     var mailOptions = {
         from: 'Darrell Pawson <darrells.webdesign@gmail.com',
-        to: req.body.email,
+        to: 'darrells.webdesign@gmail.com',
         cc: req.body.email,
         subject: 'Website Submission',
         text: 'You have a submission with the following details... Name: '+ req.body.name + ' Phone: ' + req.body.phone + ' Email: ' + req.body.email + ' Message: ' + req.body.message,
