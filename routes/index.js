@@ -189,7 +189,7 @@ router.post('/reset/:token', function(req, res) {
 
 // User profiles
 
-router.get("/users/:id", function(req, res) {
+router.get("/users/:id", middleware.checkProfileOwnership, function(req, res) {
    User.findById(req.params.id, function(err, foundUser){
        if(err || !foundUser){
            req.flash("error", "Something went wrong");
@@ -207,7 +207,7 @@ router.get("/users/:id", function(req, res) {
 });
 
 // Edit Route
-router.get("/users/:id/edit", function(req, res) {
+router.get("/users/:id/edit", middleware.checkProfileOwnership, function(req, res) {
    User.findById(req.params.id, function(err, foundUser) {
      if(err || !foundUser) {
        req.flash("error", "That user doesnt exist");
@@ -219,7 +219,7 @@ router.get("/users/:id/edit", function(req, res) {
 });
 
 // update ROUTE
-router.put("/users/:id", function(req, res) {
+router.put("/users/:id", middleware.checkProfileOwnership, function(req, res) {
   var newData = {
     firstName: req.body.user.firstName,
     lastName: req.body.user.lastName,
