@@ -5,6 +5,7 @@ var Campground = require("../models/campground");
 var middleware = require("../middleware");
 var geocoder = require('geocoder');
 
+
 // this sets access to /campgrounds
 router.get("/", function(req, res){
     var noMatch = null;

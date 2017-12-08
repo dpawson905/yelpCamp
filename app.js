@@ -22,6 +22,7 @@ var commentRoutes    = require("./routes/comments"),
     authRoutes       = require("./routes/index");
 
 var url = process.env.DATABASEURL;
+// "mongodb://localhost/lets_camp"
 mongoose.connect(url, {useMongoClient: true});
 
 mongoose.Promise = global.Promise;
