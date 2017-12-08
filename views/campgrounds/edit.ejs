@@ -3,15 +3,21 @@
 <div class="row">
     <h1 class="text-center">Edit </h1>
     <div class="form-size">
-        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST">
+        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="campgroundName">Campground Name</label>
                 <input id="campgroundName" class="form-control" type=text name="campground[name]" value="<%=campground.name%>">
             </div>
             <div class="form-group">
                 <label for="image">Image</label>
-                <input id="image" class="form-control" type=text name="campground[image]" value="<%=campground.image%>">
+                <input id="image" class="form-control" type=file name="campground[image]" value="<%=campground.image%>">
             </div>
+            <% if(campground.image !== "/uploads/no-image.png") { %>
+                <div class="checkbox">
+                  <img src="<%= campground.image %>" width="50px">
+                  <label><input type="checkbox" name="removeImage">Remove image?</label>
+                </div>
+                <% } %>
             <div class="form-group">
                 <label for="campgroundCost">Price of Campground</label>
                 <input id="campgroundCost" class="form-control" type="number" name="campground[cost]" value="<%= campground.cost %>" step="0.01" min="0" required>

@@ -7,7 +7,17 @@ var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var middleware = require("../middleware");
+var multer = require("multer");
 
+var storage =   multer.diskStorage({
+  destination: function(req, file, callback) {
+    callback(null, './public/uploads');
+  },
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var upload = multer({ storage : storage}).single('image');
 
 // root Route
 router.get("/", function(req, res){
@@ -22,36 +32,45 @@ router.get("/register", function(req, res) {
 
 // handle signup logic
 router.post("/register", function(req, res) {
-  var answer = req.body.answer;
-    var newUser = new User({
-            username: req.body.username,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            avatar: req.body.avatar,
-            bio: req.body.bio
-        });
-        
-    if(req.body.adminCode === process.env.ADMINCODE) {
-        
-        newUser.isAdmin = true;
+  upload(req, res, function(err) {
+    if(err){
+      req.flash("error", err.message);
+      return res.redirect("/register");
     }
+    var newUser = new User({
+      username: req.body.username,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      avatar: req.body.avatar,
+      bio: req.body.bio
+    });
+    
+    if(typeof req.file !== "undefined") {
+      newUser.avatar = '/uploads/' + req.file.filename;
+    } else {
+      newUser.avatar = '/uploads/no-image.png';
+    }
+    
+    if(req.body.adminCode === process.env.ADMINCODE) {
+      newUser.isAdmin = true;
+    }
+    
     if(req.body.answer !== process.env.SECRET){
       req.flash("error", "answer the question");
       res.redirect("back");
     } else {
-    
-    User.register(newUser, req.body.password, function(err, user){
+      User.register(newUser, req.body.password, function(err, user){
         if(err){
-            return res.render("register", {error: err.message});
+          return res.render("register", {error: err.message});
         }
         passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome to Let's Camp " + user.username);
-            res.redirect("/campgrounds"); 
-          
+          req.flash("success", "Welcome to Let's Camp " + user.username);
+          res.redirect("/campgrounds"); 
         }); 
-    });
+      });
     }
+  });
 });
 
 

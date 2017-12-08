@@ -3,14 +3,14 @@
 <div class="row">
     <h1 class="text-center">Create a New Campground</h1>
     <div class="form-size">
-        <form action="/campgrounds" method="POST">
+        <form action="/campgrounds" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="campgroundName">Campground Name</label>
                 <input id="campgroundName" class="form-control" type="text" name="name" placeholder="Name">
             </div>
              <div class="form-group">
                  <label for="image">Image</label>
-                <input class="form-control" type="text" name="image" id="image" placeholder="Image URL" required>
+                <input class="form-control" type="file" name="image" id="image" placeholder="Image URL" required>
             </div>
             <div class="form-group">
                 <label for="campgroundCost">Price of Campground</label>
