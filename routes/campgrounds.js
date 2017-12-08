@@ -147,7 +147,8 @@ router.put("/:id",  middleware.checkCampgroundOwnership, function(req, res){
         }
         if(req.body.removeImage) {
             req.body.campground.image = "/uploads/no-image.png";
-        } else {
+        } 
+        else if(req.file) {
              req.body.campground.image = '/uploads/' + req.file.filename;
         }
         geocoder.geocode(req.body.campground.location, function (err, data) {
