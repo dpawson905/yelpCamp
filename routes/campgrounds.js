@@ -1,7 +1,6 @@
 var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
-// var Comment = require("../models/comment");
 var middleware = require("../middleware");
 var geocoder = require('geocoder');
 var multer = require("multer");
@@ -28,7 +27,7 @@ router.get("/", function(req, res){
         Campground.find({name: regex}).skip((perPage * page) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
             Campground.count({name: regex}).exec(function (err, count) {
                 if (err) {
-                    console.log(err);
+                    req.flash("error", "Something went wrong... Please try again.");
                     res.redirect("back");
                 } else {
                     if(allCampgrounds.length < 1) {
@@ -147,8 +146,7 @@ router.put("/:id",  middleware.checkCampgroundOwnership, function(req, res){
         }
         if(req.body.removeImage) {
             req.body.campground.image = "/uploads/no-image.png";
-        } 
-        else if(req.file) {
+        } else if(req.file) {
              req.body.campground.image = '/uploads/' + req.file.filename;
         }
         geocoder.geocode(req.body.campground.location, function (err, data) {
@@ -186,7 +184,7 @@ router.delete("/:id", middleware.checkCampgroundOwnership,  function(req, res){
 
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
+}
 
 
 module.exports = router;

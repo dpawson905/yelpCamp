@@ -3,7 +3,7 @@
 <div class="row">
     <h1 style="text-align: center">Edit</h1>
     <div class="form-size">
-        <form action="/users/<%=user._id%>?_method=PUT" method="post">
+        <form action="/users/<%=user._id%>?_method=PUT" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input class="form-control" type="text" name="user[firstName]" value="<%=user.firstName%>">
             </div>
@@ -14,8 +14,14 @@
                 <input class="form-control" type="email" name="user[email]" value="<%=user.email%>">
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="user[avatar]" value="<%=user.avatar%>">
+                <input class="form-control" type="file" name="avatar">
             </div>
+             <% if(user.avatar !== "/uploads/no-image.png") { %>
+                <div class="checkbox">
+                  <img src="<%= user.avatar %>" width="50px">
+                  <label><input type="checkbox" name="removeImage">Remove image?</label>
+                </div>
+          <% } %>
             <div class="form-group">
                 <label for="bio">Bio</label>
                 <input class="form-control" type="bio" name="user[bio]" rows="5" value="<%=user.bio%>"></input>

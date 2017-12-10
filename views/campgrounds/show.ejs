@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-9">
         <div class="thumbnail">
-            <img class="image-responsive" src="<%= campground.image %>">
+            <img class="img-responsive" src="<%= campground.image %>">
             <div class="caption-full caption">
                 <h4 class="pull-right">$<%=campground.cost%>/night</h4>
                 <h4><a><%= campground.name %></a></h4>
@@ -124,7 +124,7 @@
     <!--COMMENT SECTION END-->
     </div>
 </div>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAByWLOzhyxHkG5N90C44GebSUt74o2oiE&callback=initMap"></script>
 <script>
   function initMap() {
     var lat = <%= campground.lat %>;
@@ -152,6 +152,26 @@
     });
   }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAByWLOzhyxHkG5N90C44GebSUt74o2oiE&callback=initMap"></script>
+<script>
+            $("#checkingAddress").click(checkGeocode);
+
+            function checkGeocode(){
+                var addr = document.getElementById("location");
+                // Get geocoder instance
+                var geocoder = new google.maps.Geocoder();
+
+                // Geocode the address
+                geocoder.geocode({'address': addr.value}, function(results, status){
+                if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                    alert('looks good')
+                    // set it to the correct, formatted address if it's valid
+                    addr.value = results[0].formatted_address;;
+
+                    // show an error if it's not
+                }else alert("Invalid address");
+            });
+        };
+        </script>
+
 
 <% include ../partials/footer %>

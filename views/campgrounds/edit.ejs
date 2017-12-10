@@ -6,29 +6,29 @@
         <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="campgroundName">Campground Name</label>
-                <input id="campgroundName" class="form-control" type=text name="campground[name]" value="<%=campground.name%>">
+                <input id="campgroundName" class="form-control" type=text name="campground[name]" value="<%=campground.name%>" required>
             </div>
             <div class="form-group">
                 <label for="image">Image</label>
-                <input id="image" class="form-control" type="file" name="image">
+                <input id="image" class="form-control" type="file" name="image" required>
             </div>
-            <% if(campground.image !== "/uploads/no-image.png") { %>
+          <% if(campground.image !== "/uploads/no-image.png") { %>
                 <div class="checkbox">
                   <img src="<%= campground.image %>" width="50px">
                   <label><input type="checkbox" name="removeImage">Remove image?</label>
                 </div>
-                <% } %>
+          <% } %>
             <div class="form-group">
                 <label for="campgroundCost">Price of Campground</label>
                 <input id="campgroundCost" class="form-control" type="number" name="campground[cost]" value="<%= campground.cost %>" step="0.01" min="0" required>
             </div>
             <div class="form-group">
                 <label for="location">Location</label>
-                <input class="form-control" type="text" name="campground[location]" id="location" value="<%= campground.location %>">
+                <input class="form-control" type="text" name="campground[location]" id="location" value="<%= campground.location %>" required>
             </div>
             <div class="form-group">
                 <label for="description"></label>
-                <input id="description" class="form-control" type=text name="campground[description]" value="<%=campground.description%>">
+                <input id="description" class="form-control" type=text name="campground[description]" value="<%=campground.description%>" required>
             </div>
             <div class="form-group">
                 <button class="btn btn-lg btn-primary btn-block">Submit!</button>

@@ -1,54 +1,88 @@
 <% include ./partials/header %>
 
 <div class="row">
-    
-    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+    <div class="col-xs-8 col-xs-offset-2">
+      <form action="/register" method="post" enctype="multipart/form-data">
         <h1 class="text-center">Sign Up</h1>
-        <form action="/register" method="post">
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input id="firstName" class="form-control" type="text" name="firstName" placeholder="First Name">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input id="lastName" class="form-control" type="text" name="lastName" placeholder="Last Name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" class="form-control" type="email" name="email" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="avatar">Avatar Image URL</label>
-                <input id="avatar" class="form-control" type="file" name="avatar" placeholder="Avatar Image URL">
-            </div>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input id="username" class="form-control" type="text" name="username" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input id="password" class="form-control" type="password" name="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="bio">Bio</label>
-                <textarea id="bio" class="form-control" type="bio" name="bio" rows="5" placeholder="Write a short description of yourself and what you enjoy about camping."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="adminCode">Admin Code</label>
-                <input id="adminCode" class="form-control" type="text" name="adminCode" placeholder="Admin Code">
-            </div>
-            <div class="form-group">
-                <label for="number">Enter: I Love Camping</label>
-                <input id="number" class="form-control" type="text" name="answer" placeholder="Answer">
-            </div>
-            
-            <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
-            </div>
-            
-        </form>
-        <a href="/campgrounds">Go Back</a>
     </div>
-</div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-2">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" class="form-control" type="text" name="firstName" placeholder="First Name*" required>
+        </div>
+      </div>
+      <div class="col-xs-4 col-xs-offset-0">
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" class="form-control" type="text" name="lastName" placeholder="Last Name*" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-2">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" class="form-control" type="email" name="email" placeholder="Email*" required>
+        </div>
+      </div>
+      <div class="col-xs-4 col-xs-offset-0">
+        <div class="form-group">
+          <label for="avatar">Avatar Image URL</label>
+          <input id="avatar" class="form-control" type="file" name="avatar">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-2">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" class="form-control" type="text" name="username" placeholder="Username*" required>
+        </div>
+      </div>
+      <div class="col-xs-4 col-xs-offset-0">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" class="form-control" type="password" name="password" placeholder="Password*" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea id="bio" class="form-control" type="bio" name="bio" rows="5" placeholder="Write a short description of yourself and what you enjoy about camping."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-2">
+        <div class="form-group">
+          <label for="adminCode">Admin Code</label>
+          <input id="adminCode" class="form-control" type="text" name="adminCode" placeholder="Admin Code">
+        </div>
+      </div>
+      <div class="col-xs-4 col-xs-offset-0">
+        <div class="form-group">
+          <label for="number">Enter: I Love Camping</label>
+          <input id="number" class="form-control" type="text" name="answer" placeholder="Answer*" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="form-group">
+          <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+        </div>
+        <a href="/campgrounds">Go Back</a>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="text-center"><strong>*</strong> indicates a required field.</p>
+        </div>
+    </div>
+  </div>
 
 <% include ./partials/footer %>

@@ -7,11 +7,8 @@ var express        = require("express"),
     passport       = require("passport"),
     LocalStrategy  = require("passport-local"),
     methodOverride = require("method-override"),
-    Campground     = require("./models/campground"),
-    Comment        = require("./models/comment"),
-    User           = require("./models/user"),
-    session        = require("express-session"),
-    seedDB         = require("./seeds");
+    User           = require("./models/user");
+    //seedDB         = require("./seeds");
 
 // config dotenv
 require("dotenv").load();
@@ -19,7 +16,10 @@ require("dotenv").load();
 // Requiring routes    
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
-    authRoutes       = require("./routes/index");
+    authRoutes       = require("./routes/index"),
+    contactRoutes    = require("./routes/contact"),
+    forgotRoutes     = require("./routes/forgot");
+
 
 var url = process.env.DATABASEURL;
 // "mongodb://localhost/lets_camp"
@@ -60,6 +60,8 @@ app.use(function(req, res, next){
 app.use("/", authRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/contact", contactRoutes);
+app.use(forgotRoutes);
 
 // this is required for the server to init
 app.listen(process.env.PORT, process.env.IP, function() {
