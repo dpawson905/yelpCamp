@@ -1,7 +1,14 @@
 body {
-    margin-top: 100px;
-    margin-bottom: 80px;
+    margin-top: 70px;
+    margin-bottom: 70px;
     background-color: #f8f8ff;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
 }
 
 .bg-dark {
@@ -20,10 +27,11 @@ body {
 /* Title */
 .navbar-default .navbar-brand {
     color: #f8f8ff;
+    letter-spacing: 2px;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    color: #f1f1ff;
+    color: #c1c1c1;
 }
 /* Link */
 .navbar-default .navbar-nav > li > a {
@@ -31,7 +39,7 @@ body {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: #f1f1ff;
+    color: #c1c1c1;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -42,7 +50,7 @@ body {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-    color: #f8f8ff;
+    color: #c1c1c1;
     background-color: steelblue;
 }
 .navbar-default .navbar-toggle {
