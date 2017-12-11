@@ -21,13 +21,15 @@ var commentRoutes    = require("./routes/comments"),
     forgotRoutes     = require("./routes/forgot");
 
 
-var url = process.env.DATABASEURL;
+var url = process.env.DATABASEURL || "mongodb://localhost/lets_camp1";
 // "mongodb://localhost/lets_camp"
 mongoose.connect(url, {useMongoClient: true});
 
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 // use this to remove .ejs from res.render()
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

@@ -3,15 +3,13 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 var Campground = require("../models/campground");
-var async = require("async");
-var nodemailer = require("nodemailer");
-var crypto = require("crypto");
 var middleware = require("../middleware");
 var multer = require("multer");
+var request = require("request");
 
-var storage =   multer.diskStorage({
+var storage = multer.diskStorage({
   destination: function(req, file, callback) {
-    callback(null, './public/uploads/userImg');
+    callback(null, "./public/uploads/userImg");
   },
   filename: function(req, file, callback) {
     callback(null, Date.now() + file.originalname);
@@ -30,50 +28,67 @@ router.get("/register", function(req, res) {
     res.render("register", {page: "register"});
 });
 
+
+
 // handle signup logic
 router.post("/register", function(req, res) {
   upload(req, res, function(err) {
-    if(err){
+    if (err) {
       console.log(err.message);
       req.flash("error", err.message);
       return res.redirect("/register");
     }
-    var newUser = new User({
-      username: req.body.username,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      bio: req.body.bio
-    });
-    
-    if(typeof req.file !== "undefined") {
-      newUser.avatar = '/uploads/userImg/' + req.file.filename;
-    } else {
-      newUser.avatar = '/uploads/userImg/no-image.png';
+    const captcha = req.body["g-recaptcha-response"];
+    if (!captcha) {
+      console.log(req.body);
+      req.flash("error", "Please select captcha");
+      return res.redirect("/register");
     }
-    console.log(newUser);
-    if(req.body.adminCode === process.env.ADMINCODE) {
-      newUser.isAdmin = true;
-    }
-    
-    if(req.body.answer !== process.env.SECRET){
-      req.flash("error", "answer the question");
-      return res.redirect("back");
-    } else {
-      User.register(newUser, req.body.password, function(err, user){
-        if(err){
-          console.log(err.message);
-          return res.render("register", {error: err.message});
-        }
-        passport.authenticate("local")(req, res, function(){
-          req.flash("success", "Welcome to Let's Camp " + user.username);
-          res.redirect("/campgrounds"); 
-        }); 
+    // secret key
+    var secretKey = process.env.CAPTCHA;
+    // Verify URL
+    var verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}&remoteip=${req
+      .connection.remoteAddress}`;
+    // Make request to Verify URL
+    request.get(verifyURL, (err, response, body) => {
+      // if not successful
+      if (body.success !== undefined && !body.success) {
+        req.flash("error", "Captcha Failed");
+        return res.redirect("/register");
+      }
+
+      var newUser = new User({
+        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        bio: req.body.bio
       });
-    }
+
+      if (typeof req.file !== "undefined") {
+        newUser.avatar = "/uploads/userImg/" + req.file.filename;
+      } else {
+        newUser.avatar = "/uploads/userImg/no-image.png";
+      }
+      if (req.body.adminCode === process.env.ADMINCODE) {
+        newUser.isAdmin = true;
+      }
+
+      User.register(newUser, req.body.password, function(err, user) {
+        if (err) {
+          console.log(err.message);
+          return res.render("register", { error: err.message });
+        }
+        passport.authenticate("local")(req, res, function() {
+          req.flash("success", "Welcome to Let's Camp " + user.username);
+          res.redirect("/campgrounds");
+        });
+      });
+    });
   });
 });
 
+    
 
 // Login Form Route
 router.get("/login", function(req, res) {

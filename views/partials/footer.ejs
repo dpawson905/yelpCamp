@@ -22,24 +22,21 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	    <script src="https://use.fontawesome.com/aca25d40ae.js"></script>
 	    
-        <!--<script type="text/javascript" src="/"></script>-->
-        
-        
+       
         <script>
-    $(document).ready(function() {
-      $('#comment_form').submit(function() {
-        $(this).ajaxSubmit({
-          error: function(xhr) {
-            status('Error: ' + xhr.status);
-          },
-         success: function(response) {
-          console.log(response);
-         }
-        });
-        //Very important line, it disable the page refresh.
-        return false;
-      });
-    });
-  </script>
+          $(document).ready(function(){" "}
+            {$("#comment_form").submit(function() {
+              $(this).ajaxSubmit({
+                error: function(xhr) {
+                  status("Error: " + xhr.status);
+                },
+                success: function(response) {
+                 console.log(response);
+                }
+              });
+              //Very important line, it disable the page refresh.
+              return false;
+            })});
+        </script>
     </body>
 </html>

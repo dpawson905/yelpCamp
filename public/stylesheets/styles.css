@@ -143,6 +143,10 @@ h1 {
     width: 100%;
 }
 
+#captcha {
+    padding-left: 45px;
+}
+
 .form-size {
     width: 33%;
     margin: 30px auto;
