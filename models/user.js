@@ -6,7 +6,6 @@ var UserSchema = new mongoose.Schema({
       type: String, 
       unique: true, 
       required: true,
-      index: true,
       trim: true,
       minlength: 3,
       maxlength: 10,
@@ -16,14 +15,12 @@ var UserSchema = new mongoose.Schema({
    avatar: String,
    firstName: {
       type: String,
-      required: true,
       minlength: 3,
       maxlength: 15
    },
    
    lastName: {
       type: String,
-      required: true,
       minlength: 3,
       maxlength: 15
    },
