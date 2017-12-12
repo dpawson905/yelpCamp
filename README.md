@@ -27,4 +27,4 @@ This was done through a class on Udemy and I have added more features to it and 
    - And delete user
    
    
-Check out my [blog](https://blog.djpawson.me) because I will try to keep that updated with what I've done and what I am working on.
+Check out my [blog](https://blog.djpawson.me{:target="_blank"}) because I will try to keep that updated with what I've done and what I am working on.
