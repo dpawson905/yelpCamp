@@ -7,7 +7,9 @@ var express        = require("express"),
     passport       = require("passport"),
     LocalStrategy  = require("passport-local"),
     methodOverride = require("method-override"),
-    User           = require("./models/user");
+    User           = require("./models/user"),
+    helmet         = require("helmet"),
+    session        = require("express-session");
     //seedDB         = require("./seeds");
 
 // config dotenv
@@ -29,18 +31,19 @@ mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(helmet());
 
 // use this to remove .ejs from res.render()
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-app.use(cookieParser("secret"));
+app.use(cookieParser());
 app.locals.moment = require('moment');
 // seedDB(); // seed the database for testing purposes.
 
 // Passport config
-app.use(require("express-session")({
+app.use(session({
     secret: "I like Ch33s3c@ke F@ct0rY It is the BEst!",
     resave: false,
     saveUninitialized: false

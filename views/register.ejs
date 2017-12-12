@@ -8,13 +8,13 @@
       <div class="col-md-4 col-md-offset-2 col-xs-8 col-xs-offset-2">
         <div class="form-group">
           <label for="firstName">First Name</label>
-          <input id="firstName" class="form-control" type="text" id="firstName" name="firstName" placeholder="First Name*" required>
+          <input pattern=".{3,15}" id="firstName" class="form-control" type="text" id="firstName" name="firstName" placeholder="First Name*" required title="Must be between 3 and 15 Characters">
         </div>
       </div>
       <div class="col-md-4 col-md-offset-0 col-xs-8 col-xs-offset-2">
         <div class="form-group">
           <label for="lastName">Last Name</label>
-          <input id="lastName" class="form-control" type="text" id="lastName" name="lastName" placeholder="Last Name*" required>
+          <input pattern=".{3,15}" id="lastName" class="form-control" type="text" id="lastName" name="lastName" placeholder="Last Name*" required title="Must be between 3 and 15 Characters">
         </div>
       </div>
     </div>
@@ -36,13 +36,13 @@
      <div class="col-md-4 col-md-offset-2 col-xs-8 col-xs-offset-2">
         <div class="form-group">
           <label for="username">Username</label>
-          <input id="username" class="form-control" type="text" id="username" name="username" placeholder="Username*" required>
+          <input pattern=".{3,10}" id="username" class="form-control" type="text" id="username" name="username" placeholder="Username*" required title="Must be between 3 and 10 Characters">
         </div>
       </div>
       <div class="col-md-4 col-md-offset-0 col-xs-8 col-xs-offset-2">
         <div class="form-group">
           <label for="password">Password</label>
-          <input id="password" class="form-control" type="password" id="password" name="password" placeholder="Password*" required>
+          <input pattern="[0-9a-zA-Z]{8,20}" id="password" class="form-control" type="password" id="password" name="password" placeholder="Password*" required title="Password must be between 8 and 20 characters.">
         </div>
       </div>
     </div>
