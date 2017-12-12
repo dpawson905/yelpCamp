@@ -1,42 +1,38 @@
         </div>  <!-- /.container -->
         <div  class="footer navbar-fixed-bottom">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                  <p class="text-center">Proudly Coded by <a href="https://djpawson.me">Darrell Pawson</a></p>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                  <ul class="text-center">
-                    <li><a href="https://twitter.com/dpawson905" target="_blank"><i class="fa fa-twitter"></i>&nbsp;| </a></li>
-                    <li><a href="https://facebook.com/darrell.pawson" target="_blank">&nbsp;<i class="fa fa-facebook"></i>&nbsp;| </a></li>
-                    <li><a href="https://www.linkedin.com/in/darrell-pawson-297700125" target="_blank">&nbsp;<i class="fa fa-linkedin"></i>&nbsp;| </a></li>
-			              <li><a href="https://github.com/dpawson905" target="_blank">&nbsp;<i class="fa fa-github"></i> </a></li>
-                  </ul>
-                </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <p class="text-center">Proudly Coded by <a href="https://djpawson.me">Darrell Pawson</a></p>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <ul class="text-center">
+                  <li><a href="https://twitter.com/dpawson905" target="_blank"><i class="fa fa-twitter"></i>&nbsp;| </a></li>
+                  <li><a href="https://facebook.com/darrell.pawson" target="_blank">&nbsp;<i class="fa fa-facebook"></i>&nbsp;| </a></li>
+                  <li><a href="https://www.linkedin.com/in/darrell-pawson-297700125" target="_blank">&nbsp;<i class="fa fa-linkedin"></i>&nbsp;| </a></li>
+		          <li><a href="https://github.com/dpawson905" target="_blank">&nbsp;<i class="fa fa-github"></i> </a></li>
+                </ul>
               </div>
             </div>
           </div>
-         <!-- jQuery -->
-        
+        </div>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	    <script src="https://use.fontawesome.com/aca25d40ae.js"></script>
-	    
-       
-        <script>
-          $(document).ready(function(){" "}
-            {$("#comment_form").submit(function() {
+	    <script>
+          $(document).ready(function(){" "}),
+            $("#comment_form").submit(function() {
               $(this).ajaxSubmit({
                 error: function(xhr) {
                   status("Error: " + xhr.status);
                 },
                 success: function(response) {
-                 console.log(response);
+                  console.log(response);
                 }
               });
               //Very important line, it disable the page refresh.
               return false;
-            })});
+            });
         </script>
     </body>
 </html>

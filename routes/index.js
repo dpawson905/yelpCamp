@@ -32,12 +32,6 @@ router.get("/register", function(req, res) {
 
 // handle signup logic
 router.post("/register", function(req, res) {
-  upload(req, res, function(err) {
-    if (err) {
-      console.log(err.message);
-      req.flash("error", err.message);
-      return res.redirect("/register");
-    }
     const captcha = req.body["g-recaptcha-response"];
     if (!captcha) {
       console.log(req.body);
@@ -64,12 +58,8 @@ router.post("/register", function(req, res) {
         email: req.body.email,
         bio: req.body.bio
       });
-
-      if (typeof req.file !== "undefined") {
-        newUser.avatar = "/uploads/userImg/" + req.file.filename;
-      } else {
-        newUser.avatar = "/uploads/userImg/no-image.png";
-      }
+      newUser.avatar = "/uploads/userImg/no-image.png";
+      
       if (req.body.adminCode === process.env.ADMINCODE) {
         newUser.isAdmin = true;
       }
@@ -85,7 +75,6 @@ router.post("/register", function(req, res) {
         });
       });
     });
-  });
 });
 
     
