@@ -9,7 +9,11 @@ var UserSchema = new mongoose.Schema({
       trim: true,
       minlength: 3,
       maxlength: 10,
-      lowercase: true
+      memberSince: 
+      {
+         type: Date,
+         default: new Date(Date.now())
+      }
    },
    
    avatar: String,
@@ -32,11 +36,6 @@ var UserSchema = new mongoose.Schema({
    isAdmin: { type: Boolean, default: false }
 });
 
-// const options = ({
-//    attemptsField: 5,
-//    limitAttempts: true
-   
-// });
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

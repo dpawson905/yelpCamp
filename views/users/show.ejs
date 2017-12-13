@@ -6,7 +6,7 @@
       <div class="thumbnail">
         <img src="<%=user.avatar%>" alt="user profile image">
         <div class="caption">
-          <a href="mailto:<%=user.email%>">Contact Me</a>
+          
         </div>
       </div>
       <h5>Bio:</h5>
@@ -25,6 +25,7 @@
               <a href="../campgrounds/<%= campground.id %>">
                 <%= campground.name %>
               </a>
+              - <em></em>posted: <%= moment(campground.createdAt).fromNow() %></em>
             </p>
             <% }) %>
               <% } %>

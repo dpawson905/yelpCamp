@@ -89,7 +89,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                 var lat = data.results[0].geometry.location.lat;
                 var lng = data.results[0].geometry.location.lng;
                 var location = data.results[0].formatted_address;
-                var newCampground = {name: name, image: image, description: desc, cost: cost, author:author, location: location, lat: lat, lng: lng};
+                var newCampground = {name: name, image: image, description: desc, cost: cost, author: author, location: location, lat: lat, lng: lng};
                 // Create a new campground and save to DB
                 Campground.create(newCampground, function(err, newlyCreated){
                     if(err){

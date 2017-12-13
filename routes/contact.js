@@ -13,7 +13,7 @@ router.post("/send", function(req, res) {
     if (!captcha) {
       console.log(req.body);
       req.flash("error", "Please select captcha");
-      return res.redirect("/register");
+      return res.redirect("back");
     }
     // secret key
     var secretKey = process.env.CAPTCHA;
