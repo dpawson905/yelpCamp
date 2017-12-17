@@ -70,6 +70,7 @@ h1 {
 /* End Navbar CSS */
 
 .jumbotron {
+    margin-bottom: 50px;
     background-color: #007849;
     color: #f8f8ff;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
