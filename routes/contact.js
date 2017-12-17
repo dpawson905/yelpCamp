@@ -5,7 +5,7 @@ var request = require("request");
 
 // contact form
 router.get("/", function(req, res) {
-   res.render("contact/contactMe");
+   res.render("contact/contactMe", {page: 'contact'});
 });
 
 router.post("/send", function(req, res) {
