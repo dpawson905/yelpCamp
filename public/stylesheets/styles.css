@@ -209,3 +209,10 @@ h1 {
         height: auto !important;
     }
 }
+
+@media (max-width: 550px) {
+    .jumbotron button {
+        font-size: 10px;
+    }
+}
+
