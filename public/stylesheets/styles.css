@@ -1,7 +1,6 @@
 body {
-    margin-top: 70px;
-    margin-bottom: 70px;
-    background-color: #f8f8ff;
+    padding: 100px 50px;
+    background-color: #efefef;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 1px;
 }
@@ -12,17 +11,21 @@ h1 {
 }
 
 .bg-dark {
-  background-color: rgba(175, 175, 175, 0.5);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
-              3px 5px 3px rgba(0, 0, 0, 0.1),
-              6px 8px 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(232, 232, 232, 0.9);
+  /*color: #fff;*/
+  box-shadow: 0 2px 0 1px rgba(0, 0, 0, 0), 
+              3px 5px 3px 2px rgba(0, 0, 0, 0.1),
+              6px 8px 6px 4px rgba(0, 0, 0, 0.3);
   padding: 30px;
 }
 
 /* navbar */
 .navbar-default {
-    background-color: steelblue;
-    border-color: #E7E7E7;
+    background-color: #007849;
+    border-color: #037534;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              1px 5px 3px rgba(0, 0, 0, 0.1),
+              2px 8px 6px rgba(0, 0, 0, 0.3);
 }
 /* Title */
 .navbar-default .navbar-brand {
@@ -66,6 +69,21 @@ h1 {
 }
 /* End Navbar CSS */
 
+.jumbotron {
+    background-color: #007849;
+    color: #f8f8ff;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.thumbnail {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+}
+
 .thumbnail img {
     width: 100%;
     border-radius: 3px;
@@ -108,7 +126,7 @@ h1 {
 
 /* Footer */
 .footer {
-    background-color: steelblue;
+    background-color: #007849;
     height: 50px;
     color: #fff;
 }
@@ -170,7 +188,7 @@ h1 {
 }
 @media (max-width: 800px) {
   .bg-dark {
-      background-color: rgba(175, 175, 175, 0.5);
+      background-color: rgba(244, 244, 244, 0.5);
       box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
                   3px 5px 3px rgba(0, 0, 0, 0.1),
                   6px 8px 6px rgba(0, 0, 0, 0.3);

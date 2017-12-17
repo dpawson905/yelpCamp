@@ -1,14 +1,17 @@
 <% include ../partials/header %>
 
-<header class="jumbotron">
-    <div class="container">
-        <h1>Welcome to Let&#39;s Camp!</h1>
-        <p>View our hand-picked campgrounds from all over the world</p>
-        <p>
-            <a class="btn btn-primary btn-lg" href="/campgrounds/new"><i class="fa fa-plus fa-lg" aria-hidden="true"></i> Add a New Campground</a>
-        </p>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="jumbotron">
+                <h1>Welcome to Let&#39;s Camp!</h1>
+                <p>View our hand-picked campgrounds from all over the world</p>
+                <p>
+                <button class="btn btn-primary btn-lg" ><a href="/campgrounds/new"></a><i class="fa fa-plus fa-lg" aria-hidden="true"> </i> Add a New Campground</button>
+                </p> 
+            </div>
+        </div>
     </div>
-</header>
+
     <div class="row text-center flex">
         <div class="col-md-12">
             <% if(noMatch) { %>
@@ -83,6 +86,6 @@
         <% } %>
     </ul>
     <% } %>
-</div>
+    </div>
 </div>
 <% include ../partials/footer %>
