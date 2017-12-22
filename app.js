@@ -23,7 +23,7 @@ var commentRoutes    = require("./routes/comments"),
     forgotRoutes     = require("./routes/forgot");
 
 
-var url = process.env.DATABASEURL || "mongodb://localhost/lets_camp1";
+var url = process.env.DATABASEURL || "mongodb://localhost/new_db";
 // "mongodb://localhost/lets_camp"
 mongoose.connect(url, {useMongoClient: true});
 

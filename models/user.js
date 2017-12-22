@@ -9,11 +9,6 @@ var UserSchema = new mongoose.Schema({
       trim: true,
       minlength: 3,
       maxlength: 10,
-      memberSince: 
-      {
-         type: Date,
-         default: new Date(Date.now())
-      }
    },
    
    avatar: String,

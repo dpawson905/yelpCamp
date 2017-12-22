@@ -73,4 +73,27 @@ middlewareObj.isLoggedIn = function(req, res, next) {
 };
 
 
+middlewareObj.isAdmin = function(req, res, next) {
+    if(req.isAuthenticated()){
+        User.findById(req.user.id, function(err, foundUser){
+            if(err || !foundUser){
+                console.log(err);
+                req.flash("error", err);
+                res.redirect("/campgrounds");
+            } else {
+                // does user own the campground?
+                if(req.user.isAdmin) {
+                    next();
+                } else {
+                    req.flash("error", "You don't have permission to do that.");
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        req.flash("error", "You need to be logged in to do that.");
+        res.redirect("back");
+    }
+};
+
 module.exports = middlewareObj;

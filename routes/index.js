@@ -161,5 +161,21 @@ router.put("/users/:id", middleware.checkProfileOwnership, function(req, res) {
   });
 });
 
+router.get("/admin", middleware.isAdmin, function(req, res) {
+User.find({}, function(err, foundUsers){
+       if(err || !foundUsers){
+           req.flash("error", "Something went wrong");
+           res.redirect("/campgrounds");
+       } else {
+          Campground.find().where("author.id").equals(foundUsers._id).exec(function(err, foundCampgrounds) {
+              if(err || !foundUsers){
+                req.flash("error", "Something went wrong");
+                res.redirect("/campgrounds"); 
+              }
+               res.render("acp", {users: foundUsers, campgrounds: foundCampgrounds});
+           });
+       }
+   });
+});
 
 module.exports = router;

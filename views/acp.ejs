@@ -1,0 +1,33 @@
+<% include ./partials/header %>
+
+  <% users.forEach(function(user) { %>
+    <div class="row bg-dark">
+      <div class="col-md-2">
+        <div class="thumbnail small">
+          <img src="<%=user.avatar%>" alt="user profile image">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3 class="profile-username"><%=user.firstName + " " + user.lastName %></h3>
+        <p class="profile-username"><%=user.email %></p>
+      </div>
+      <div class="col-md-6">
+        <h4>Campgrounds posted by <%= user.username %></h4>
+        <% if(campgrounds.length < 1) { %>
+          <h6 class="mt-4 ml-2"><em>No campgrounds submitted yet...</em></h6>
+        <% } else { %>
+          <% campgrounds.forEach(function(campground) { %>
+            <p class="user-campground-list">
+              <a href="../campgrounds/<%= campground.id %>">
+                <%= campground.name %>
+              </a>
+              - <em></em>posted: <%= moment(campground.createdAt).fromNow() %></em>
+            </p>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+    <br>
+  <% }); %>
+
+<% include ./partials/footer %>
