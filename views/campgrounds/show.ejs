@@ -16,7 +16,7 @@
                 <h4><a><%= campground.name %></a></h4>
                 <p><%= campground.description %></p>
                 <p>
-                    Submitted By: <a href="/users/<%=campground.author.id%>"><strong><%=campground.author.username %></strong></a>, <em><% moment(campground.createdAt).fromNow() %></em>
+                    Submitted By: <a href="/users/<%=campground.author.id%>"><strong><%=campground.author.username %></strong></a>, <em><%= moment(campground.createdAt).fromNow() %></em>
                 </p>
                 <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                     <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
