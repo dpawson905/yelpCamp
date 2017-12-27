@@ -56,7 +56,8 @@ router.post("/register", function(req, res) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        bio: req.body.bio
+        bio: req.body.bio,
+        loggedIn: false
       });
       newUser.avatar = "/uploads/userImg/no-image.png";
       
@@ -94,9 +95,10 @@ router.post("/login", passport.authenticate("local",
 
 // logout logic
 router.get("/logout", function(req, res) {
-   req.logout();
-   req.flash("success", "Logged You Out");
-   res.redirect("/campgrounds");
+    req.logout();
+    req.flash("success", "Logged You Out");
+    res.redirect("/campgrounds");
+    User.loggedIn = false;
 });
 
 // User profiles
@@ -162,18 +164,12 @@ router.put("/users/:id", middleware.checkProfileOwnership, function(req, res) {
 });
 
 router.get("/admin", middleware.isAdmin, function(req, res) {
-User.find({}, function(err, foundUsers){
-       if(err || !foundUsers){
-           req.flash("error", "Something went wrong");
-           res.redirect("/campgrounds");
-       } else {
-          Campground.find().where("author.id").equals(foundUsers._id).exec(function(err, foundCampgrounds) {
-              if(err || !foundUsers){
-                req.flash("error", "Something went wrong");
-                res.redirect("/campgrounds"); 
-              }
-               res.render("acp", {users: foundUsers, campgrounds: foundCampgrounds});
-           });
+    User.find({}).populate('campgrounds').exec(function(err, foundUsers){
+        if(err || !foundUsers){
+            req.flash("error", "Something went wrong");
+            res.redirect("/campgrounds");
+        } else {
+            res.render("acp", {users: foundUsers});
        }
    });
 });

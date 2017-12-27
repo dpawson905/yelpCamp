@@ -12,6 +12,7 @@ var UserSchema = new mongoose.Schema({
    },
    
    avatar: String,
+   
    firstName: {
       type: String,
       minlength: 3,
@@ -28,7 +29,14 @@ var UserSchema = new mongoose.Schema({
    bio: String,
    resetPasswordToken: String,
    resetPasswordExpires: Date,
-   isAdmin: { type: Boolean, default: false }
+   isAdmin: { type: Boolean, default: false },
+   
+   campgrounds: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Campground"
+      }
+   ]
 });
 
 UserSchema.plugin(passportLocalMongoose);

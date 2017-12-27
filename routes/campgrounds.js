@@ -1,6 +1,7 @@
 var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
+var User = require("../models/user");
 var middleware = require("../middleware");
 var geocoder = require('geocoder');
 var multer = require("multer");
@@ -65,27 +66,30 @@ router.get("/", function(req, res){
 
 //CREATE - add new campground to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
-    upload(req, res, function(err){
-         if(err){
-             req.flash("error", "Error uploading file");
-             return res.redirect("back");
-         }
-          var name = req.body.name;
-          if(typeof req.file !== "undefined") {
-            var image = "/uploads/" + req.file.filename;
-          } else {
-              image = "/uploads/no-image.png";
-          }
-          var desc = req.body.description;
-          var author = {
-              id: req.user._id,
-              username: req.user.username
-          };
-          var cost = req.body.cost;
-          geocoder.geocode(req.body.location, function (err, data) {
-              if(err){
-                  return req.flash("error", err.message);
-              }
+    User.findById(req.user._id, function(err, user) {
+        upload(req, res, function(err){
+			if(err){
+			 req.flash("error", "Error uploading file");
+			 return res.redirect("back");
+			}
+			var name = req.body.name;
+			if(typeof req.file !== "undefined") {
+				var image = "/uploads/" + req.file.filename;
+			} else {
+				image = "/uploads/no-image.png";
+			}
+			var desc = req.body.description;
+			var author = {
+				id: req.user._id,
+				username: req.user.username
+			};
+			var cost = req.body.cost;
+			geocoder.geocode(req.body.location, function (err, data) {
+                if(err || !data.results.length){ // check for error or empty results array
+                    if(err && err.message) console.log(err.message);
+                    req.flash("error", 'No results for that location, please try again');
+                    return res.redirect('back');
+                }
                 var lat = data.results[0].geometry.location.lat;
                 var lng = data.results[0].geometry.location.lng;
                 var location = data.results[0].formatted_address;
@@ -95,6 +99,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     if(err){
                         console.log(err);
                     } else {
+                    	user.campgrounds.push(newlyCreated);
+                    	user.save();
                         //redirect back to campgrounds page
                         req.flash("success", "Contrats, " + name + " has been created and added to our listings.");
                         res.redirect("/campgrounds");
@@ -103,6 +109,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             });
         });
     });
+});
  
 
 // this is the form page for adding a new campground
