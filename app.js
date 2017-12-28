@@ -20,7 +20,8 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     authRoutes       = require("./routes/index"),
     contactRoutes    = require("./routes/contact"),
-    forgotRoutes     = require("./routes/forgot");
+    forgotRoutes     = require("./routes/forgot"),
+    adminRoutes      = require("./routes/admin");
 
 
 var url = process.env.DATABASEURL || "mongodb://localhost/new_db";
@@ -67,6 +68,7 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 app.use("/contact", contactRoutes);
 app.use(forgotRoutes);
+app.use(adminRoutes);
 
 // this is required for the server to init
 app.listen(process.env.PORT, process.env.IP, function() {

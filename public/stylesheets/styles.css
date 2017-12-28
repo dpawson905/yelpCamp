@@ -192,7 +192,7 @@ h1 {
     font-size: 0.8em;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .bg-dark {
       background-color: rgba(244, 244, 244, 0.5);
       box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
@@ -202,7 +202,7 @@ h1 {
       margin: 10px;
     }
 }
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     #map {
         height: 400px;
         width: 100%;
@@ -215,9 +215,15 @@ h1 {
     }
 }
 
-@media (max-width: 550px) {
-    .jumbotron button {
+@media (max-width: 768px) {
+    .jumbotron .button {
         font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-username {
+        font-size: .5em;
     }
 }
 
