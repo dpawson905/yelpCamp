@@ -16,19 +16,17 @@ router.get("/admin", middleware.isAdmin, function(req, res) {
 
 // update USER to ADMIN
 router.put("/user/:id", middleware.isAdmin, function(req, res) {
-   if(req.body.makeAdmin) {
-            User.isAdmin = true;
-        } else {
-             User.isAdmin = false;
-        }
-     User.findByIdAndUpdate(req.params.id, function(err, user){
+    User.findById(req.params.id, function(err, user) {
         if(err || !user) {
             req.flash("error", "Invalid User");
-            res.redirect("/admin");
-        } else {
-            req.flash("success", "User is now admin");
-            res.redirect("/admin");
+            return res.redirect("/admin");
         }
+        if(req.body.makeAdmin) {
+            user.isAdmin = true;
+            user.save();
+            req.flash("success", "User is now admin");
+        }
+        res.redirect("/admin");
     });
 });
     

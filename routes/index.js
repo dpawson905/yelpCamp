@@ -2,33 +2,17 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
-var Campground = require("../models/campground");
-var middleware = require("../middleware");
-var multer = require("multer");
 var request = require("request");
-
-var storage = multer.diskStorage({
-  destination: function(req, file, callback) {
-    callback(null, "./public/uploads/userImg");
-  },
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
-var upload = multer({ storage : storage}).single('avatar');
 
 // root Route
 router.get("/", function(req, res){
     res.render("landing");
 });
 
-
 // show register form
 router.get("/register", function(req, res) {
     res.render("register", {page: "register"});
 });
-
-
 
 // handle signup logic
 router.post("/register", function(req, res) {
@@ -86,11 +70,25 @@ router.get("/login", function(req, res) {
 });
 
 // handle login logic
-router.post("/login", passport.authenticate("local", 
-    {
-        successReturnToOrRedirect: "/campgrounds",
-        failureRedirect: "/login"
-    }), function(req, res) {
+// router.post("/login", passport.authenticate("local", 
+//     {
+//         successReturnToOrRedirect: "/campgrounds",
+//         failureRedirect: "/login"
+//     }), function(req, res) {
+// });
+
+//handling login logic
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      var redirectTo = req.session.redirectTo ? req.session.redirectTo : '/campgrounds';
+      delete req.session.redirectTo;
+      res.redirect(redirectTo);
+    });
+  })(req, res, next);
 });
 
 // logout logic
@@ -99,79 +97,6 @@ router.get("/logout", function(req, res) {
     req.flash("success", "Logged You Out");
     res.redirect("/campgrounds");
     User.loggedIn = false;
-});
-
-// User profiles
-
-router.get("/users/:id", middleware.checkProfileOwnership, function(req, res) {
-   User.findById(req.params.id, function(err, foundUser){
-       if(err || !foundUser){
-           req.flash("error", "Something went wrong");
-           res.redirect("/campgrounds");
-       } else {
-           Campground.find().where("author.id").equals(foundUser._id).exec(function(err, campgrounds) {
-              if(err || !foundUser){
-                req.flash("error", "Something went wrong");
-                res.redirect("/campgrounds"); 
-              }
-               res.render("users/show", {user: foundUser, campgrounds: campgrounds});
-           });
-       }
-   });
-});
-
-// Edit Route
-router.get("/users/:id/edit", middleware.checkProfileOwnership, function(req, res) {
-   User.findById(req.params.id, function(err, foundUser) {
-     if(err || !foundUser) {
-       req.flash("error", "That user doesnt exist");
-       res.redirect("back");
-     } else {
-       res.render("users/edit", {user: foundUser});
-     }
-   }); 
-});
-
-// update ROUTE
-router.put("/users/:id", middleware.checkProfileOwnership, function(req, res) {
-  upload(req, res, function(err) {
-    if(err){
-      req.flash("error", err.message);
-      return res.redirect("back");
-    } 
-  var newData = {
-    firstName: req.body.user.firstName,
-    lastName: req.body.user.lastName,
-    email: req.body.user.email,
-    bio: req.body.user.bio
-    };
-    if(req.body.user.removeImage) {
-            newData.avatar = "/uploads/userImg/no-image.png";
-        } else if(req.file) {
-             newData.avatar = '/uploads/userImg/' + req.file.filename;
-        }
-        console.log(newData);
-    User.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, user){
-      if(err || !user) {
-        req.flash("error", "Invalid User");
-        res.redirect("back");
-      } else {
-        req.flash("success", "Profile updated");
-        res.redirect("/users/" + user._id);
-      }
-    });
-  });
-});
-
-router.get("/admin", middleware.isAdmin, function(req, res) {
-    User.find({}).populate('campgrounds').exec(function(err, foundUsers){
-        if(err || !foundUsers){
-            req.flash("error", "Something went wrong");
-            res.redirect("/campgrounds");
-        } else {
-            res.render("acp", {users: foundUsers});
-       }
-   });
 });
 
 module.exports = router;

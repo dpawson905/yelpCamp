@@ -4,11 +4,32 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Raleway', sans-serif;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.inline form, a {
+  display: inline;
+}
+
+.userbtn {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 20px;
+}
+
+.usersection {
+  margin-bottom: 20px;
 }
 
 .bg-dark {
@@ -17,7 +38,7 @@ h1 {
   box-shadow: 0 2px 0 1px rgba(0, 0, 0, 0), 
               3px 5px 3px 2px rgba(0, 0, 0, 0.1),
               6px 8px 6px 4px rgba(0, 0, 0, 0.3);
-  padding: 30px;
+  padding: 10px;
 }
 
 /* navbar */
@@ -141,10 +162,19 @@ h1 {
 /* End Navbar CSS */
 
 .jumbotron {
-    margin: 50px 0;
+    margin: 0 0 20px 0;
     background-color: #007849;
     color: #f8f8ff;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+}
+
+.jumbotron.main {
+  margin: 25px 0;
+  background-color: #007849;
+  color: #f8f8ff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
               3px 5px 3px rgba(0, 0, 0, 0.1),
               6px 8px 6px rgba(0, 0, 0, 0.3);
 }
@@ -160,11 +190,8 @@ h1 {
     width: 100%;
     border-radius: 3px;
 }
-.small {
-    height: 50%;
-    width: 100%;
-    padding-bottom: 10px;
-}
+
+
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -172,7 +199,6 @@ h1 {
 
 .img-resize {
     height: 175px !important;
-    
 }
 
 .thumbnail {
@@ -183,14 +209,16 @@ h1 {
     display: inline;
 }
 
+.delButton {
+  margin-top: 10px;
+}
+
 .delete-comment {
     display: inline;
 }
 
 /* Profile CSS */
-.profile-username{
-    margin-top: 5px;
-}
+
 
 /* Gradient transparent - color - transparent */
 

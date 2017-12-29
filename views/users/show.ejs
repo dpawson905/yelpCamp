@@ -1,19 +1,13 @@
 <% include ../partials/header %>
 
-  <div class="row bg-dark">
-    <div class="col-md-4">
-      <h1 class="profile-username"><%=user.firstName + " " + user.lastName %></h1>
+  <div class="row bg-dark text-center">
+    <div class="col-md-3">
+      <h5><%=user.firstName + " " + user.lastName %></h5>
       <div class="thumbnail">
-        <img src="<%=user.avatar%>" alt="user profile image">
-        <div class="caption">
-          
-        </div>
+        <img class="img-responsive" src="<%=user.avatar%>" alt="user profile image">
       </div>
-      <h5>Bio:</h5>
       <hr class="style-two">
-      <p>
-        <%= user.bio %>
-      </p>
+      <p class="text-left">Bio:  <%= user.bio %></p>
     </div>
     <div class="col-md-6">
       <h4>Campgrounds posted by <%= user.username %></h4>
@@ -30,11 +24,17 @@
             <% }) %>
               <% } %>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
+      <h5>Actions</h5>  
         <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
         <div class="text-center">
-          <a class="profile-username btn btn-warning" href="/users/<%= user._id %>/edit">
-            Edit Profile </a>
+          <span class="inline">
+            <a class="profile-username btn btn-warning userbtn" href="/users/<%= user._id %>/edit">
+              Edit Profile </a>
+            <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
+              <button class="btn btn-danger userbtn">Delete</button>
+            </form>
+          </span>
         </div>
         <% } %>
     </div>

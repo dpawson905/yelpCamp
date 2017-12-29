@@ -1,51 +1,55 @@
 <% include ./partials/header %>
+  <div class="row jumbotron text-center">
+    <div class="col-xs-12">
+      <h1 class="">Admin Control   Panel</h1>
+      <h2 class=" lead"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Denotes User is Admin</h2>
+      <h2 class=" lead"><i class="fa fa-lock" aria-hidden="true"></i> Denotes User is not Admin</h2>
+    </div>
+  </div>
 
   <% users.forEach(function(user) { %>
-    <div class="row bg-dark">
-      <div class="col-md-2 col-xs-12">
-        <div class="thumbnail small">
-          <img src="<%=user.avatar%>" alt="user profile image">
+    <div class="row bg-dark text-center usersection">
+      <div class="col-md-2">
+        <% if(!user.isAdmin) { %>
+          <h5><strong><a href="/users/<%=user.id%>"><%= user.firstName + " " + user.lastName %> </a><i class="fa fa-lock" aria-hidden="true"></i></strong></h5>
+        <% } else { %>
+          <h5><strong><a href="/users/<%=user.id%>"><%= user.firstName + " " + user.lastName %> </a><i class="fa fa-unlock-alt" aria-hidden="true"></i></strong></h5>
+        <% } %>
+        <div class="thumbnail">
+          <img class="img-responsive" src="<%=user.avatar%>" alt="user profile image">
         </div>
       </div>
-      <div class="col-md-3 col-xs-12">
-        <h3 class="profile-username"><%=user.firstName + " " + user.lastName %></h3>
-        <p class="profile-username"><%=user.email %></p>
-        <div class="profile-username"><%=user.username%></div>
-      </div>
-      <div class="col-md-4 col-xs-12">
-        <h4>Campgrounds posted by <%= user.username %></h4>
+      <div class="col-md-6">
+        <h5>List of <%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %>'s Campgrounds</h5>
         <% if(user.campgrounds.length < 1) { %>
           <h6 class="mt-4 ml-2"><em>No campgrounds submitted yet...</em></h6>
         <% } else { %>
           <% user.campgrounds.forEach(function(campground) { %>
-            <p class="user-campground-list">
-              <a href="/campgrounds/<%= campground.id %>">
+            <ul>
+              <li><a href="/campgrounds/<%= campground.id %>">
                 <%= campground.name %>
-              </a>
-            </p>
+              </a> -<em><%= moment(campground.createdAt).fromNow() %></em></li>
+            </ul>
           <% }) %>
         <% } %>
       </div>
-      <div class="col-md-3 col-xs-12">
-        <div>
+      <div class="col-md-4">
+        <h5>Actions</h5>
+        <span class="inline">
           <% if(!user.isAdmin) { %>
-            <label><input type="checkbox" name="makeAdmin">Admin</label>
             <form action="/user/<%=user.id%>?_method=PUT" method="post">
-                <button class="btn btn-warning">Update</button>
+              <label class="userbtn"><input type="checkbox" name="makeAdmin"> Admin</label>
+              <button class="btn btn-warning userbtn" type="submit">Make Admin</button>
             </form>
-            <br>
             <form action="/user/<%=user.id%>?_method=DELETE" method="POST">
-              <div class="form-group">
-                  <button class="btn btn-danger">Delete</button>
-              </div>
+              <button class="btn btn-danger userbtn">Delete</button>
             </form>
           <% } else { %>
-            <label><input type="checkbox" name="makeAdmin" disabled checked>Admin</label>
+            <h4>No Actions Necessary</h4>
           <% } %>
-        </div>
+        </span>
       </div>
     </div>
-    <br>
   <% }); %>
 
 <% include ./partials/footer %>

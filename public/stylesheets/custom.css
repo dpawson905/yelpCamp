@@ -5,6 +5,40 @@ body {
     letter-spacing: 1px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.inline form, a {
+  display: inline;
+}
+
+.userbtn {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 20px;
+}
+
+.usersection {
+  margin-bottom: 20px;
+}
+
+.bg-dark {
+  background-color: rgba(232, 232, 232, 0.9);
+  /*color: #fff;*/
+  box-shadow: 0 2px 0 1px rgba(0, 0, 0, 0), 
+              3px 5px 3px 2px rgba(0, 0, 0, 0.1),
+              6px 8px 6px 4px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
 /* navbar */
 .navbar-default {
     background-color: #007849;
@@ -65,6 +99,75 @@ body {
   }
 }
 
+.jumbotron {
+    margin: 0 0 20px 0;
+    background-color: #007849;
+    color: #f8f8ff;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+}
+
+.jumbotron.main {
+  margin: 25px 0;
+  background-color: #007849;
+  color: #f8f8ff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.thumbnail {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+              3px 5px 3px rgba(0, 0, 0, 0.1),
+              6px 8px 6px rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail img {
+    width: 100%;
+    border-radius: 3px;
+}
+
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img-resize {
+    height: 175px !important;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+#delete-form {
+    display: inline;
+}
+
+.delButton {
+  margin-top: 10px;
+}
+
+.delete-comment {
+    display: inline;
+}
+
+/* Profile CSS */
+
+
+/* Gradient transparent - color - transparent */
+
+.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+/* End Profile CSS */
+
+
 /* Footer */
 .footer {
     background-color: #007849;
@@ -95,3 +198,69 @@ body {
     color: #fff;
 }
 /* End Footer CSS */
+
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+#captcha {
+    padding-left: 45px;
+}
+
+#captcha1 {
+    padding-left: 27px;
+}
+
+.form-size {
+    width: 33%;
+    margin: 30px auto;
+}
+
+
+/* Media */
+@media (max-width: 800px) {
+  .footer p {
+    font-size: 0.39em;
+  }
+}
+@media (max-width: 800px) {
+  .footer li {
+    font-size: 0.8em;
+  }
+}
+@media (max-width: 768px) {
+  .bg-dark {
+      background-color: rgba(244, 244, 244, 0.5);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0), 
+                  3px 5px 3px rgba(0, 0, 0, 0.1),
+                  6px 8px 6px rgba(0, 0, 0, 0.3);
+      padding: 60px;
+      margin: 10px;
+    }
+}
+@media (max-width: 768px) {
+    #map {
+        height: 400px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 991px) {
+    .img-resize {
+        height: auto !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .jumbotron .button {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-username {
+        font-size: .5em;
+    }
+}
