@@ -38,8 +38,8 @@
         <span class="inline">
           <% if(!user.isAdmin) { %>
             <form action="/user/<%=user.id%>?_method=PUT" method="post">
-              <label class="userbtn"><input type="checkbox" name="makeAdmin"> Admin</label>
-              <button class="btn btn-warning userbtn" type="submit">Make Admin</button>
+              <label class="userbtn fixed"><input id="check" type="checkbox" name="makeAdmin"> Admin</label>
+              <button id="btncheck" class="btn btn-warning userbtn" type="submit">Make Admin</button>
             </form>
             <form action="/user/<%=user.id%>?_method=DELETE" method="POST">
               <button class="btn btn-danger userbtn">Delete</button>

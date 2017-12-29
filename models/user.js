@@ -2,41 +2,41 @@ var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
 
 var UserSchema = new mongoose.Schema({
-   username: {
-      type: String, 
-      unique: true, 
-      required: true,
-      trim: true,
-      minlength: 3,
-      maxlength: 10,
-   },
+  username: {
+    type: String, 
+    unique: true, 
+    required: true,
+    trim: true,
+    minlength: 3,
+    maxlength: 10,
+  },
    
-   avatar: String,
+  avatar: String,
    
-   firstName: {
-      type: String,
-      minlength: 3,
-      maxlength: 15
-   },
+  firstName: {
+    type: String,
+    minlength: 3,
+    maxlength: 15
+  },
    
-   lastName: {
-      type: String,
-      minlength: 3,
-      maxlength: 15
-   },
+  lastName: {
+    type: String,
+    minlength: 3,
+    maxlength: 15
+  },
    
-   email: {type: String, unique: true, required: true},
-   bio: String,
-   resetPasswordToken: String,
-   resetPasswordExpires: Date,
-   isAdmin: { type: Boolean, default: false },
+  email: {type: String, unique: true, required: true},
+  bio: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+  isAdmin: { type: Boolean, default: false },
    
-   campgrounds: [
-      {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: "Campground"
-      }
-   ]
+  campgrounds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Campground"
+    }
+  ]
 });
 
 UserSchema.plugin(passportLocalMongoose);
