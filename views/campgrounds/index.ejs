@@ -1,89 +1,191 @@
-<% include ../partials/header %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="jumbotron">
-                <h1>Welcome to Let&#39;s Camp!</h1>
-                <p>View our hand-picked campgrounds from all over the world</p>
-                <p><a class="btn btn-primary btn-lg button" href="/campgrounds/new"><i class="fa fa-plus fa-lg" aria-hidden="true"> </i> Add New Campground</a></p>
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Let&#39;s Camp</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:400,700" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src='../js/script.js'></script>
+</head>
+
+<body>
+  
+  <div id="hero">  
+    <nav class="navbar navbar-default custom-navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Let&#39;s Camp</a>
         </div>
-    </div>
-
-    <div class="row text-center flex">
-        <div class="col-md-12">
-            <% if(noMatch) { %>
-                <h3><%= noMatch %></h3>
-                <p>
-                    <form class="form-inline" action="/campgrounds" method="GET">
-                        <div class="form-group">
-                            <input type="text" name="search" placeholder="Campground Search" class="form-control">
-                            <input type="submit" value="Search" class="btn btn-default">
-                        </div>
-                    </form>
-                </p>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="<%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>"><a href="/campgrounds">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if(!currentUser){ %>
+              <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
+              <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
+              <li class="<%= typeof page !== 'undefined' && page === 'contact' ? 'active' : '' %>"><a href="/contact">Contact Us</a></li>
+            <% } else if(currentUser.isAdmin) { %>
+              <li><a href="/admin">Admin</a></li>
+              <li><a href="/users/<%=currentUser.id%>">Signed In As <%= currentUser.username %></a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+              <li><a href="/users/<%=currentUser.id%>">Signed In As <%= currentUser.username %></a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/logout">Logout</a></li>
             <% } %>
+          </ul>
         </div>
+      </div>
+    </nav>
+
+    <div class="header-overlay">
+      <div id="hero-text">
+        <h1>Welcome to Let's Camp</h1>
+          <a href="#viewCGS" type="button" class="btn btn-info smoothscroll">View Campgrounds</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div id="viewCGS" class="row">
+      <div class="col-xs-12">
+        <div class="jumbotron">
+          <h3 class="text-center">View our hand-picked campgrounds from all over the world</h3>
+          <div class="text-center">
+            <p><a class="btn btn-primary btn-lg button" href="/campgrounds/new"><i class="fa fa-plus fa-lg" aria-hidden="true"> </i> Add New Campground</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center flex">
+      <div class="col-md-12">
+        <% if(noMatch) { %>
+          <h3><%= noMatch %></h3>
+          <p>
+            <form class="form-inline" action="/campgrounds" method="GET">
+                <div class="form-group">
+                    <input type="text" name="search" placeholder="Campground Search" class="form-control">
+                    <input type="submit" value="Search" class="btn btn-default">
+                </div>
+            </form>
+          </p>
+        <% } %>
+      </div>
     </div>
     <div class="row flex text-center">
-        <% campgrounds.forEach(function(campground){ %>
-            <div class="col-md-3 col-sm-12 col-xs-12">
-                <div class="thumbnail">
-                    <img class="img-resize img-responsive" src="<%= campground.image %>">
-                    <div class="caption">
-                        <h5><%= campground.name %></h5>
-                    </div>
-                <p>
-                    <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">More Info</a>
-                </p>
+      <% campgrounds.forEach(function(campground){ %>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="thumbnail">
+            <img class="img-resize img-responsive" src="<%= campground.image %>">
+            <div class="caption">
+              <h5><%= campground.name %></h5>
             </div>
+            <p>
+              <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">More Info</a>
+            </p>
+          </div>
         </div>
-    <% }); %>
-</div>
-<div class="container">
-   <div class="row text-center">
-    <% if (pages && pages > 0) { %>
-    <ul class="pagination text-center">
-        <% if (current == 1) { %>
-        <li class="disabled"><a>First</a></li>
-        <% } else { %>
-        <li><a href="/campgrounds<%if(search){%>?search=<%=search%><%}%>">First</a></li>
-        <% } %>
- 
-        <% if (current == 1) { %>
-        <li class="disabled"><a>«</a></li>
-        <% } else { %>
-        <li><a href="/campgrounds?page=<%= Number(current) - 1 %><%if(search){%>&search=<%=search%><%}%>">«</a></li>
-        <% } %>
- 
-        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-        <% if (i !== 1) { %>
-        <li class="disabled"><a>...</a></li>
-        <% } %>
-        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-        <% if (i == current) { %>
-        <li class="active"><a><%= i %></a></li>
-        <% } else { %>
-        <li><a href="/campgrounds?page=<%= i %><%if(search){%>&search=<%=search%><%}%>"><%= i %></a></li>
-        <% } %>
-        <% if (i == Number(current) + 4 && i < pages) { %>
-        <li class="disabled"><a>...</a></li>
-        <% } %>
-        <% } %>
- 
-        <% if (current == pages) { %>
-        <li class="disabled"><a>»</a></li>
-        <% } else { %>
-        <li><a href="/campgrounds?page=<%= Number(current) + 1 %><%if(search){%>&search=<%=search%><%}%>">»</a></li>
-        <% } %>
- 
-        <% if (current == pages) { %>
-        <li class="disabled"><a>Last</a></li>
-        <% } else { %>
-        <li><a href="/campgrounds?page=<%= pages %><%if(search){%>&search=<%=search%><%}%>">Last</a></li>
-        <% } %>
-    </ul>
-    <% } %>
+      <% }); %>
     </div>
-</div>
-<% include ../partials/footer %>
+  </div>
+
+  <div class="container">
+    <div class="row text-center">
+      <% if (pages && pages > 0) { %>
+        <ul class="pagination text-center">
+          <% if (current == 1) { %>
+            <li class="disabled"><a>First</a></li>
+          <% } else { %>
+            <li><a href="/campgrounds<%if(search){%>?search=<%=search%><%}%>">First</a></li>
+          <% } %>
+
+          <% if (current == 1) { %>
+            <li class="disabled"><a>«</a></li>
+          <% } else { %>
+            <li><a href="/campgrounds?page=<%= Number(current) - 1 %><%if(search){%>&search=<%=search%><%}%>">«</a></li>
+          <% } %>
+
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          <% if (i !== 1) { %>
+            <li class="disabled"><a>...</a></li>
+          <% } %>
+          <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+            <% if (i == current) { %>
+              <li class="active"><a><%= i %></a></li>
+            <% } else { %>
+              <li><a href="/campgrounds?page=<%= i %><%if(search){%>&search=<%=search%><%}%>"><%= i %></a></li>
+              <% } %>
+              <% if (i == Number(current) + 4 && i < pages) { %>
+                <li class="disabled"><a>...</a></li>
+              <% } %>
+            <% } %>
+
+            <% if (current == pages) { %>
+              <li class="disabled"><a>»</a></li>
+            <% } else { %>
+              <li><a href="/campgrounds?page=<%= Number(current) + 1 %><%if(search){%>&search=<%=search%><%}%>">»</a></li>
+            <% } %>
+
+            <% if (current == pages) { %>
+              <li class="disabled"><a>Last</a></li>
+            <% } else { %>
+              <li><a href="/campgrounds?page=<%= pages %><%if(search){%>&search=<%=search%><%}%>">Last</a></li>
+              <% } %>
+            
+        </ul>
+          <% } %>
+    </div>
+  </div>
+  <div  class="footer ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <p class="text-center">Proudly Coded by <a href="https://djpawson.me">Darrell Pawson</a></p>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <ul class="text-center">
+            <li><a href="https://twitter.com/dpawson905" target="_blank"><i class="fa fa-twitter"></i>&nbsp;| </a></li>
+            <li><a href="https://facebook.com/darrell.pawson" target="_blank">&nbsp;<i class="fa fa-facebook"></i>&nbsp;| </a></li>
+            <li><a href="https://www.linkedin.com/in/darrell-pawson-297700125" target="_blank">&nbsp;<i class="fa fa-linkedin"></i>&nbsp;| </a></li>
+            <li><a href="https://github.com/dpawson905" target="_blank">&nbsp;<i class="fa fa-github"></i> </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/aca25d40ae.js"></script>
+  <script>
+    $(document).ready(function(){" "}),
+    $("#comment_form").submit(function() {
+      $(this).ajaxSubmit({
+        error: function(xhr) {
+        status("Error: " + xhr.status);
+      },
+      success: function(response) {
+        console.log(response);
+      }
+      });
+      //Very important line, it disable the page refresh.
+      return false;
+    });
+  </script>
+</body>
+</html>
