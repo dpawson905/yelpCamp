@@ -1,5 +1,8 @@
 var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
+var User = require("../models/user");
+const Campground = require('./campground');
+const Comment = require('./comment');
 
 var UserSchema = new mongoose.Schema({
   username: {
@@ -38,6 +41,19 @@ var UserSchema = new mongoose.Schema({
     }
   ]
 });
+
+// pre-hook middleware to delete all user's posts and comments from db when user is deleted
+UserSchema.pre('remove', async function(next) {
+  try {
+      await Campground.remove({ 'author.id': this._id });
+      await Comment.remove({ 'author.id': this._id });
+      next();
+  } catch (err) {
+      console.log(err);
+  }
+});
+
+
 
 UserSchema.plugin(passportLocalMongoose);
 

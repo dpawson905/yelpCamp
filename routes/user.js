@@ -78,11 +78,12 @@ router.put("/users/:id", middleware.checkProfileOwnership, function(req, res) {
 
 // DESTROY USER
 router.delete("/users/:id", middleware.checkProfileOwnership,  function(req, res){
-    User.findByIdAndRemove(req.params.id, function(err){
+    User.findById(req.params.id, function(err, user){
         if(err){
             res.redirect("/campgrounds");
         } else {
-            req.flash("success", "Your account has been deleted")
+            user.remove();
+            req.flash("success", "Your account has been deleted");
             res.redirect("/campgrounds");
         }
     });

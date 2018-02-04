@@ -25,8 +25,7 @@ router.post("/register", function(req, res) {
     // secret key
     var secretKey = process.env.CAPTCHA;
     // Verify URL
-    var verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}&remoteip=${req
-      .connection.remoteAddress}`;
+    var verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}&remoteip=${req.connection.remoteAddress}`;
     // Make request to Verify URL
     request.get(verifyURL, (err, response, body) => {
       // if not successful
@@ -69,13 +68,6 @@ router.get("/login", function(req, res) {
    res.render("login", {page: "login"}); 
 });
 
-// handle login logic
-// router.post("/login", passport.authenticate("local", 
-//     {
-//         successReturnToOrRedirect: "/campgrounds",
-//         failureRedirect: "/login"
-//     }), function(req, res) {
-// });
 
 //handling login logic
 router.post('/login', function(req, res, next) {
